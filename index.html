@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>★...싸이월드 감성 다이어트 미니홈피...★</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌰</text></svg>">
+</head>
+<body>
+
+    <!-- 싸이월드 바인더 래퍼 -->
+    <div class="cy-binder-wrapper">
+
+        <!-- 바깥 프레임 -->
+        <div class="cy-binder-outer">
+            <div class="cy-binder-book">
+
+                <!-- 1. 좌측 프로필 & 위젯 바 (Left Page) -->
+                <aside class="cy-left-page">
+                    <!-- 투데이/토탈 카운터 -->
+                    <div class="cy-counter-bar">
+                        TODAY <span class="count-today" id="todayCounter">84</span>
+                        <span style="color:#b2bec3;">|</span>
+                        TOTAL <span class="count-total" id="totalCounter">15420</span>
+                    </div>
+
+                    <!-- 프로필 아바타 박스 -->
+                    <div class="cy-profile-box">
+                        <div class="profile-avatar-frame" id="profileAvatarContainer">
+                            <svg width="96" height="96" viewBox="0 0 48 48" shape-rendering="crispEdges" style="filter: drop-shadow(1px 2px 0 rgba(0,0,0,0.15));">
+                                <!-- 배경 하트 -->
+                                <path d="M 24 10 C 24 10, 20 4, 14 4 C 8 4, 4 9, 4 15 C 4 23, 13 31, 24 38 C 35 31, 44 23, 44 15 C 44 9, 40 4, 34 4 C 28 4, 24 10, 24 10 Z" fill="#ffeaa7" opacity="0.55" />
+                                
+                                <!-- 몸통 (핑크 후드티) -->
+                                <rect x="18" y="28" width="12" height="12" fill="#ff7675" rx="2" stroke="#2d3436" stroke-width="0.8" />
+                                <rect x="23" y="30" width="2" height="6" fill="#ffffff" />
+                                
+                                <!-- 양팔 & 흔드는 손 -->
+                                <rect x="14" y="30" width="3" height="7" fill="#ffeaa7" stroke="#2d3436" stroke-width="0.6" />
+                                <rect x="31" y="26" width="3" height="8" fill="#ffeaa7" stroke="#2d3436" stroke-width="0.6" />
+                                <circle cx="32.5" cy="24" r="2.5" fill="#ffeaa7" stroke="#2d3436" stroke-width="0.6" />
+
+                                <!-- 다리 & 빨간 캔버스화 -->
+                                <rect x="19" y="39" width="4" height="4" fill="#2d3436" />
+                                <rect x="25" y="39" width="4" height="4" fill="#2d3436" />
+                                <rect x="18" y="42" width="5" height="3" fill="#e74c3c" rx="1" />
+                                <rect x="25" y="42" width="5" height="3" fill="#e74c3c" rx="1" />
+
+                                <!-- 귀여운 도트 얼굴 -->
+                                <rect x="14" y="14" width="20" height="15" fill="#ffeaa7" rx="2" stroke="#2d3436" stroke-width="1" />
+                                
+                                <!-- 초롱초롱 큰 애니메이션 눈 -->
+                                <rect x="17" y="19" width="4" height="5" fill="#2d3436" rx="1" />
+                                <rect x="17" y="19" width="2" height="2" fill="#ffffff" />
+                                
+                                <rect x="27" y="19" width="4" height="5" fill="#2d3436" rx="1" />
+                                <rect x="27" y="19" width="2" height="2" fill="#ffffff" />
+
+                                <!-- 발그레 핑크 볼터치 -->
+                                <rect x="15" y="24" width="3" height="2" fill="#ff7675" rx="1" />
+                                <rect x="30" y="24" width="3" height="2" fill="#ff7675" rx="1" />
+
+                                <!-- 앙증맞은 입 -->
+                                <polygon points="23,26 24,25 25,26" fill="#c0392b" />
+
+                                <!-- 갈색 도트 헤어 & 뱅 앞머리 -->
+                                <rect x="13" y="10" width="22" height="7" fill="#5c3818" rx="2" />
+                                <rect x="13" y="15" width="3" height="8" fill="#5c3818" rx="1" />
+                                <rect x="32" y="15" width="3" height="8" fill="#5c3818" rx="1" />
+                                <rect x="15" y="15" width="5" height="4" fill="#5c3818" />
+                                <rect x="22" y="15" width="5" height="5" fill="#5c3818" />
+                                <rect x="28" y="15" width="5" height="4" fill="#5c3818" />
+
+                                <!-- 핑크 도트 리본 🎀 -->
+                                <polygon points="17,7 21,9 17,11" fill="#fd79a8" />
+                                <polygon points="25,7 21,9 25,11" fill="#fd79a8" />
+                                <circle cx="21" cy="9" r="1.5" fill="#feca57" />
+
+                                <!-- 반짝이 노란 별 -->
+                                <polygon points="38,8 39,10 41,11 39,12 38,14 37,12 35,11 37,10" fill="#f1c40f" />
+                            </svg>
+                            <span class="profile-avatar-badge" id="userLevelBadge">Lv.1 새싹</span>
+                        </div>
+
+                        <!-- Today is... 기분 선택 -->
+                        <div class="profile-mood-select-row">
+                            <span>Today is...</span>
+                            <select id="userMoodSelect" onchange="window.app.setUserMood(this.value)">
+                                <option value="♬ 맑음">♬ 맑음</option>
+                                <option value="♬ 열정">♬ 열정</option>
+                                <option value="♬ 식단중">♬ 식단중</option>
+                                <option value="♬ 배고파">♬ 배고파</option>
+                                <option value="♬ 뿌듯">♬ 뿌듯</option>
+                                <option value="♬ 리즈갱신">♬ 리즈갱신 👑</option>
+                            </select>
+                        </div>
+
+                        <!-- 감성 상태메시지 -->
+                        <div class="cy-feel-quote">
+                            <span id="feelQuoteDisplay">"ㄴㅏ는 ㄱㅏ끔... 눈물을 흘린ㄷㅏ... 치킨 앞에ㅅㅓ 배고픔을 참는 내 모습이 좋ㄷㅏ...★"</span>
+                            <button type="button" class="cy-feel-quote-edit-btn" onclick="window.app.openQuoteModal()" title="한마디 수정">✏️</button>
+                        </div>
+                    </div>
+
+                    <!-- 다이어트 목표 & 현황 카드 -->
+                    <div class="cy-diet-status-card">
+                        <div class="status-title-row">
+                            <span>📊 다이어트 현황</span>
+                            <button type="button" class="acorn-charge-btn" style="background:#3498db;" onclick="window.app.openWeightModal()">체중입력</button>
+                        </div>
+                        <div class="status-data-grid">
+                            <div>시작: <strong id="statStartWeight">62.0kg</strong></div>
+                            <div>현재: <strong id="statCurrentWeight" style="color:#e74c3c;">58.8kg</strong></div>
+                            <div>목표: <strong id="statTargetWeight">53.0kg</strong></div>
+                            <div>감량: <strong id="statDeltaWeight" style="color:#27ae60;">-3.2kg</strong></div>
+                        </div>
+                        <div style="font-size:0.75rem; color:#7f8c8d; display:flex; justify-content:space-between; margin-top:2px;">
+                            <span>달성률</span>
+                            <span id="dietProgressLabel" style="font-weight:800; color:#d35400;">35.5%</span>
+                        </div>
+                        <div class="diet-progress-track">
+                            <div class="diet-progress-fill" id="dietProgressBar" style="width: 35.5%;"></div>
+                        </div>
+                    </div>
+
+                    <!-- 도토리 지갑 -->
+                    <div class="cy-acorn-wallet">
+                        <div>
+                            <span>🌰 내 도토리:</span>
+                            <strong id="leftAcornCount" style="color:#e67e22; font-size:1rem;">65개</strong>
+                        </div>
+                        <button type="button" class="acorn-charge-btn" onclick="window.app.openFreeAcornModal()">무료 충전</button>
+                    </div>
+
+                    <!-- 오늘의 감성 포춘쿠키 & 도토리 뽑기 -->
+                    <div class="fortune-cookie-widget" onclick="window.app.openFortuneCookie()" title="오늘의 포춘쿠키 열고 도토리 받기!">
+                        <div style="display:flex; align-items:center; gap:6px;">
+                            <span class="cookie-icon-spin">🥠</span>
+                            <div>
+                                <strong style="font-size:0.8rem; color:#d35400;">오늘의 다이어트 포춘쿠키</strong>
+                                <small style="color:#795548; display:block; font-size:0.7rem;" id="cookieStatusText">클릭하여 명언 & 도토리 열기!</small>
+                            </div>
+                        </div>
+                        <span style="font-size:0.72rem; background:#ffeaa7; padding:2px 5px; border-radius:4px; font-weight:800; color:#d35400;">OPEN</span>
+                    </div>
+
+                    <!-- 싸이 BGM 미니 플레이어 -->
+                    <div class="cy-bgm-widget" id="bgmWidgetBox">
+                        <div class="bgm-marquee-container">
+                            <span class="bgm-marquee-text" id="cyBgmTitleText">♬ 프리스타일 - Y (Please Tell Me Why)</span>
+                        </div>
+                        <div class="bgm-controls-row">
+                            <div class="bgm-equalizer-bars" id="bgmEqualizer">
+                                <span class="eq-bar"></span>
+                                <span class="eq-bar"></span>
+                                <span class="eq-bar"></span>
+                                <span class="eq-bar"></span>
+                            </div>
+                            <div class="bgm-btn-group">
+                                <button type="button" class="bgm-ctrl-btn" onclick="window.app.prevBgm()" title="이전곡">◀</button>
+                                <button type="button" class="bgm-ctrl-btn" id="cyBgmPlayBtn" onclick="window.app.toggleBgm()">▶ 재생</button>
+                                <button type="button" class="bgm-ctrl-btn" onclick="window.app.nextBgm()" title="다음곡">▶</button>
+                                <button type="button" class="bgm-ctrl-btn" id="cyBgmMuteBtn" onclick="window.app.toggleMute()">🔊</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 일촌 파도타기 -->
+                    <div class="cy-surfing-row">
+                        <select onchange="window.app.surfToIlchon(this.value)">
+                            <option value="">-- 🌊 일촌 파도타기 --</option>
+                            <option value="0">🏋️ 헬창 김철수의 득근홈피</option>
+                            <option value="1">🥗 샐러드요정 민지의 풀밭</option>
+                            <option value="2">🍗 야식방어대장 태우의 철벽성</option>
+                            <option value="3">👑 미래의 나 (리즈갱신 홈피)</option>
+                        </select>
+                    </div>
+
+                    <!-- 미니홈피 주소 복사 -->
+                    <div class="cy-url-box">
+                        <span>cyworld.com/diet_hero_2000</span>
+                        <button type="button" class="cy-url-copy-btn" onclick="window.app.copyHomeUrl()">복사</button>
+                    </div>
+                </aside>
+
+                <!-- 2. 중앙 은색 나선형 스프링 링 바인더 (Spine) -->
+                <div class="cy-spiral-spine">
+                    <div class="spiral-ring"></div>
+                    <div class="spiral-ring"></div>
+                    <div class="spiral-ring"></div>
+                    <div class="spiral-ring"></div>
+                    <div class="spiral-ring"></div>
+                    <div class="spiral-ring"></div>
+                    <div class="spiral-ring"></div>
+                    <div class="spiral-ring"></div>
+                    <div class="spiral-ring"></div>
+                    <div class="spiral-ring"></div>
+                </div>
+
+                <!-- 3. 우측 메인 페이지 (Right Page) -->
+                <main class="cy-right-page">
+                    <!-- 상단 타이틀 바 -->
+                    <header class="cy-top-title-bar">
+                        <div class="cy-home-title">
+                            <span id="cyMainHomeTitle">★...ㅁㅣㄴㅣㅁㅣ의 눈물겨운 ㄷㅏ이어트 성ㄱㅗㅇㄱㅣ...★ (퍼가요~♡)</span>
+                            <button type="button" class="cy-home-title-edit-btn" onclick="window.app.openTitleModal()" title="제목 수정">✏️</button>
+                        </div>
+                        <div class="cy-top-url-info">
+                            <div class="theme-picker-row">
+                                <span>🎨 스킨:</span>
+                                <select id="themeSelect" onchange="window.app.setTheme(this.value)" class="diary-input" style="padding:2px 6px; font-size:0.75rem;">
+                                    <option value="blue">🌊 클래식 싸이블루</option>
+                                    <option value="orange">🧡 도토리 오렌지</option>
+                                    <option value="pink">💖 러블리 핑크도트</option>
+                                    <option value="mint">🌿 싱그런 민트가든</option>
+                                    <option value="lavender">💜 감성 라벤더드림</option>
+                                </select>
+                            </div>
+                        </div>
+                    </header>
+
+                    <!-- 메인 탭 콘텐츠 영역 -->
+                    <div class="cy-tab-content-container">
+
+                        <!-- [탭 1: 🏠 홈 (Home)] -->
+                        <div class="cy-tab-panel active" id="tab-home">
+                            <!-- 2.5D 미니룸 상단 툴바 (배치 모드 & 가림 방지 설정) -->
+                            <div class="miniroom-toolbar">
+                                <div class="miniroom-toolbar-title">
+                                    <span style="font-weight:800; font-size:0.92rem; color:#2c3e50;">🏠 2.5D 미니룸 가든</span>
+                                    <small style="color:#7f8c8d; margin-left:4px;">(아이템·미니미 자유 배치 & 클릭 교감)</small>
+                                </div>
+                                <div class="miniroom-toolbar-actions">
+                                    <button type="button" class="miniroom-tool-btn" style="background:#fff0f3; color:#e84393; border-color:#ff7675;" onclick="window.app.openPolaroidModal()" title="싸이 감성 폴라로이드 사진 찍기">
+                                        📸 폴라로이드
+                                    </button>
+                                    <button type="button" class="miniroom-tool-btn" id="btnToggleArrange" onclick="window.app.toggleArrangeMode()">
+                                        <span id="arrangeBtnIcon">🛋️</span> <span id="arrangeBtnText">배치 모드 OFF</span>
+                                    </button>
+                                    <button type="button" class="miniroom-tool-btn setting" onclick="window.app.openArrangeModal()" title="미니미 가림 방지 & 위치 프리셋">
+                                        ⚙️ 가구/미니미 배치 설정
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- 2.5D 미니룸 -->
+                            <div class="miniroom-box" id="gardenContainer">
+                                <!-- SVG 디오라마 렌더링 -->
+                            </div>
+
+                            <!-- 오늘 다이어트 요약 바 -->
+                            <div class="home-today-summary-bar">
+                                <div class="summary-chip-card">
+                                    <span>🚦 오늘 식단 신호등</span>
+                                    <strong id="homeDietScoreSummary">45% 클린</strong>
+                                </div>
+                                <div class="summary-chip-card">
+                                    <span>💧 물 마시기 (2L)</span>
+                                    <strong id="homeWaterSummary">0 / 8잔 (0ml)</strong>
+                                </div>
+                                <div class="summary-chip-card">
+                                    <span>👟 운동 & 만보기</span>
+                                    <strong id="homeExerciseScoreSummary">5,400보 (55% 활력)</strong>
+                                </div>
+                            </div>
+
+                            <!-- 이번 주 7일 연속 갓생 도장판 (참 잘했어요 스탬프북) -->
+                            <div class="stamp-board-card">
+                                <div class="stamp-board-header">
+                                    <div style="display:flex; align-items:center; gap:6px;">
+                                        <span style="font-size:1.1rem;">💮</span>
+                                        <strong style="font-size:0.88rem; color:#2c3e50;">이번 주 7일 연속 갓생 도장판</strong>
+                                        <small style="color:#7f8c8d;">(식단·운동 실천 시 참 잘했어요 도장 쾅!)</small>
+                                    </div>
+                                    <span id="stampStreakBadge" style="font-size:0.75rem; background:#fff0f3; color:#e84393; border:1px solid #ff7675; padding:2px 6px; border-radius:4px; font-weight:800;">
+                                        3일 연속 성공 중 🔥
+                                    </span>
+                                </div>
+                                <div class="stamp-board-grid" id="stampBoardContainer"></div>
+                            </div>
+
+                            <!-- 홈 하단 위젯: 최근 다이어리 & 일촌평 -->
+                            <div class="home-bottom-grid">
+                                <!-- 다이어리 엿보기 -->
+                                <div class="home-box-panel">
+                                    <div class="home-box-title">
+                                        <span>📔 최근 감성 다이어리</span>
+                                        <button type="button" class="acorn-charge-btn" style="background:#74b9ff;" onclick="window.app.switchTab('diary')">더보기</button>
+                                    </div>
+                                    <div id="homeRecentDiaryBox" style="font-size:0.82rem; line-height:1.5;"></div>
+                                </div>
+
+                                <!-- 일촌평 위젯 -->
+                                <div class="home-box-panel">
+                                    <div class="home-box-title">
+                                        <span>💬 일촌평 (최근 3개)</span>
+                                        <button type="button" class="acorn-charge-btn" style="background:#2ecc71;" onclick="window.app.switchTab('guestbook')">전체보기</button>
+                                    </div>
+                                    <div id="homeRecentGuestbookList" style="display:flex; flex-direction:column; gap:6px;"></div>
+                                    <!-- 간이 일촌평 남기기 -->
+                                    <div style="display:flex; gap:4px; margin-top:4px;">
+                                        <input type="text" id="quickGbInput" class="gb-input" placeholder="일촌평 한마디 남기기... (퍼가요~♡)" style="flex:1;">
+                                        <button type="button" class="acorn-charge-btn" onclick="window.app.submitQuickGuestbook()">등록</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- [탭 2: 📔 다이어리 (Diary)] -->
+                        <div class="cy-tab-panel" id="tab-diary">
+                            <div class="diary-top-row">
+                                <!-- 미니 캘린더 -->
+                                <div class="cy-calendar-box">
+                                    <div class="cal-nav-bar">
+                                        <button type="button" class="bgm-ctrl-btn" onclick="window.app.changeCalMonth(-1)">◀</button>
+                                        <span id="calMonthTitle">2026년 11월</span>
+                                        <button type="button" class="bgm-ctrl-btn" onclick="window.app.changeCalMonth(1)">▶</button>
+                                    </div>
+                                    <div class="cal-grid" id="calendarGridContainer"></div>
+                                </div>
+
+                                <!-- 체중 변화 도트 그래프 -->
+                                <div class="weight-chart-card">
+                                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                                        <span style="font-weight:800; font-size:0.9rem;">📈 최근 체중 변화 도트 차트</span>
+                                        <small style="color:#7f8c8d;">기준 목표: 53.0kg</small>
+                                    </div>
+                                    <div class="weight-svg-container" id="weightChartContainer"></div>
+                                </div>
+                            </div>
+
+                            <!-- 감성 다이어리 작성창 -->
+                            <div class="diary-write-card">
+                                <div class="diary-form-row">
+                                    <span style="font-weight:800;">날짜:</span>
+                                    <input type="date" id="diaryDateInput" class="diary-input">
+                                    <span style="font-weight:800;">오늘 몸무게:</span>
+                                    <input type="number" step="0.1" id="diaryWeightInput" class="diary-input" style="width:80px;" placeholder="kg">
+                                    <span style="font-weight:800;">스티커 도장:</span>
+                                    <select id="diaryStickerSelect" class="diary-input">
+                                        <option value="💮 참 잘했어요">💮 참 잘했어요</option>
+                                        <option value="😭 배고파 눈물">😭 배고파 눈물</option>
+                                        <option value="✨ 리즈 갱신">✨ 리즈 갱신</option>
+                                        <option value="💌 퍼가요~♡">💌 퍼가요~♡</option>
+                                        <option value="🛡️ 야식 방어">🛡️ 야식 방어</option>
+                                        <option value="💪 득근 성공">💪 득근 성공</option>
+                                    </select>
+                                </div>
+                                <input type="text" id="diaryTitleInput" class="diary-input" placeholder="다이어리 제목을 입력하세요... (예: ㄴㅏ는 ㄱㅏ끔 눈물을 흘린ㄷㅏ...)">
+                                <textarea id="diaryContentInput" class="diary-textarea" placeholder="오늘의 식단과 운동, 솔직한 감정을 싸이 감성으로 적어보세요..."></textarea>
+                                <div style="display:flex; justify-content:flex-end;">
+                                    <button type="button" class="acorn-charge-btn" style="padding:6px 16px; font-size:0.85rem;" onclick="window.app.saveDiaryEntry()">
+                                        📝 다이어리 등록하기 (+5 도토리)
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- 다이어리 목록 -->
+                            <div class="diary-list-container" id="diaryEntriesList"></div>
+                        </div>
+
+                        <!-- [탭 3: 🚦 신호등 식단 (Diet)] -->
+                        <div class="cy-tab-panel" id="tab-diet">
+                            <!-- 이번 주 골든 룰 배너 -->
+                            <div id="goldenHabitContainer" style="background:#fff9e6; border:2px solid #f9ca24; border-radius:8px; padding:10px;"></div>
+
+                            <!-- 3초 신호등 식단 -->
+                            <div class="traffic-meals-grid">
+                                <!-- 아침 -->
+                                <div class="traffic-meal-card">
+                                    <span style="font-weight:800; font-size:0.95rem;">☀️ 아침 식사</span>
+                                    <small style="color:#7f8c8d;">가벼운 3초 원터치 체크</small>
+                                    <div class="traffic-btn-row">
+                                        <button type="button" id="btn_breakfast_green" class="traffic-btn" onclick="window.app.setMealTraffic('breakfast', 'green')">🟢 클린 (단백질/채소)</button>
+                                        <button type="button" id="btn_breakfast_yellow" class="traffic-btn" onclick="window.app.setMealTraffic('breakfast', 'yellow')">🟡 보통 (일반식)</button>
+                                        <button type="button" id="btn_breakfast_red" class="traffic-btn" onclick="window.app.setMealTraffic('breakfast', 'red')">🔴 과식 (헤비식단)</button>
+                                    </div>
+                                </div>
+
+                                <!-- 점심 -->
+                                <div class="traffic-meal-card">
+                                    <span style="font-weight:800; font-size:0.95rem;">⛅ 점심 식사</span>
+                                    <small style="color:#7f8c8d;">가벼운 3초 원터치 체크</small>
+                                    <div class="traffic-btn-row">
+                                        <button type="button" id="btn_lunch_green" class="traffic-btn" onclick="window.app.setMealTraffic('lunch', 'green')">🟢 클린 (정갈한 식단)</button>
+                                        <button type="button" id="btn_lunch_yellow" class="traffic-btn" onclick="window.app.setMealTraffic('lunch', 'yellow')">🟡 보통 (적당한 외식)</button>
+                                        <button type="button" id="btn_lunch_red" class="traffic-btn" onclick="window.app.setMealTraffic('lunch', 'red')">🔴 과식 (기름진 음식)</button>
+                                    </div>
+                                </div>
+
+                                <!-- 저녁 -->
+                                <div class="traffic-meal-card">
+                                    <span style="font-weight:800; font-size:0.95rem;">🌙 저녁 식사</span>
+                                    <small style="color:#7f8c8d;">가벼운 3초 원터치 체크</small>
+                                    <div class="traffic-btn-row">
+                                        <button type="button" id="btn_dinner_green" class="traffic-btn" onclick="window.app.setMealTraffic('dinner', 'green')">🟢 클린 (가벼운 저녁)</button>
+                                        <button type="button" id="btn_dinner_yellow" class="traffic-btn" onclick="window.app.setMealTraffic('dinner', 'yellow')">🟡 보통 (탄수화물 절제)</button>
+                                        <button type="button" id="btn_dinner_red" class="traffic-btn" onclick="window.app.setMealTraffic('dinner', 'red')">🔴 과식 (야식/술자리)</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 물 2L 마시기 트래커 -->
+                            <div class="water-tracker-card">
+                                <div style="display:flex; justify-content:space-between; align-items:center;">
+                                    <span style="font-weight:800; font-size:0.95rem; color:#0984e3;">💧 물 2리터 마시기 챌린지 (250ml x 8잔)</span>
+                                    <span id="waterGoalBadge" style="font-size:0.8rem; font-weight:800; color:#0984e3;">0ml / 2,000ml</span>
+                                </div>
+                                <div class="water-cups-row" id="waterCupsContainer"></div>
+                            </div>
+
+                            <!-- 야식 참아냈다 버튼 -->
+                            <button type="button" id="btn_night_defended" class="night-shield-btn" onclick="window.app.toggleNightShield()">
+                                <span>🛡️</span>
+                                <span>오늘 밤 야식 완벽 참아냄! (+15 도토리 획득)</span>
+                            </button>
+                        </div>
+
+                        <!-- [탭 4: ⚡ 운동해빗 & 도트 만보기 (Move)] -->
+                        <div class="cy-tab-panel" id="tab-move">
+
+                            <!-- 1. 싸이월드 감성 픽셀 정밀 만보기 위젯 -->
+                            <div class="pedometer-card">
+                                <div class="pedometer-header">
+                                    <div class="pedometer-title-group">
+                                        <span class="pedometer-icon">👟</span>
+                                        <div>
+                                            <strong style="font-size:0.98rem; color:#2c3e50;">싸이월드 감성 도트 만보기</strong>
+                                            <small style="color:#7f8c8d; display:block;">목표 10,000보를 향해 달리는 나의 미니미!</small>
+                                        </div>
+                                    </div>
+                                    <div class="pedometer-goal-badge" id="pedometerGoalBadge">
+                                        5,400보 / 10,000보 (54.0%)
+                                    </div>
+                                </div>
+
+                                <!-- 실시간 걸음 환산 지표 4종 -->
+                                <div class="pedometer-metrics-grid">
+                                    <div class="ped-metric-item">
+                                        <span class="ped-metric-label">📍 예상 거리</span>
+                                        <strong class="ped-metric-val" id="pedKmDisplay">3.78 km</strong>
+                                    </div>
+                                    <div class="ped-metric-item">
+                                        <span class="ped-metric-label">🔥 소모 칼로리</span>
+                                        <strong class="ped-metric-val" id="pedKcalDisplay">216 kcal</strong>
+                                    </div>
+                                    <div class="ped-metric-item">
+                                        <span class="ped-metric-label">⏱️ 활동 시간(환산)</span>
+                                        <strong class="ped-metric-val" id="pedTimeDisplay">약 54분</strong>
+                                    </div>
+                                    <div class="ped-metric-item">
+                                        <span class="ped-metric-label">🌰 만보기 적립</span>
+                                        <strong class="ped-metric-val" id="pedAcornDisplay" style="color:#e67e22;">+6 도토리</strong>
+                                    </div>
+                                </div>
+
+                                <!-- 인터랙티브 도트 런너 트랙 -->
+                                <div class="pedometer-track-container">
+                                    <div class="ped-track-bg">
+                                        <div class="ped-track-progress" id="pedTrackProgress" style="width: 54%;"></div>
+                                        <div class="ped-checkpoint" style="left: 30%;" title="3,000보 마일스톤"><span>3k🌱</span></div>
+                                        <div class="ped-checkpoint" style="left: 60%;" title="6,000보 마일스톤"><span>6k🔥</span></div>
+                                        <div class="ped-checkpoint" style="left: 80%;" title="8,000보 마일스톤"><span>8k⭐</span></div>
+                                        <div class="ped-checkpoint" style="left: 100%;" title="10,000보 완주"><span>10k🏁</span></div>
+                                    </div>
+                                    <div class="pedometer-runner" id="pedRunner" style="left: 54%;">
+                                        <span class="runner-avatar">🏃</span>
+                                        <span class="runner-bubble" id="pedRunnerBubble">5,400보 돌파!</span>
+                                    </div>
+                                    <div class="ped-track-endpoints">
+                                        <span>🏕️ 출발 (0보)</span>
+                                        <span>🏁 만보 완주 (10,000보)</span>
+                                    </div>
+                                </div>
+
+                                <!-- 걸음 수 직접 입력 및 퀵 증감 버튼들 -->
+                                <div class="pedometer-control-box">
+                                    <div class="ped-input-row">
+                                        <label for="pedStepInput" style="font-weight:800; font-size:0.85rem; color:#2c3e50;">걸음 수 직접 입력:</label>
+                                        <input type="number" id="pedStepInput" class="diary-input" style="width:110px; font-weight:800;" placeholder="예: 6200" min="0" max="99999">
+                                        <button type="button" class="acorn-charge-btn" onclick="window.app.applyCustomSteps()">입력 적용</button>
+                                    </div>
+                                    <div class="ped-quick-btn-row">
+                                        <button type="button" class="step-quick-btn" onclick="window.app.addSteps(500)">+500보</button>
+                                        <button type="button" class="step-quick-btn" onclick="window.app.addSteps(1000)">+1,000보</button>
+                                        <button type="button" class="step-quick-btn" onclick="window.app.addSteps(3000)">+3,000보</button>
+                                        <button type="button" class="step-quick-btn" onclick="window.app.addSteps(5000)">+5,000보</button>
+                                        <button type="button" class="step-quick-btn undo" onclick="window.app.addSteps(-500)">-500보</button>
+                                        <button type="button" class="step-quick-btn reset" onclick="window.app.resetSteps()">초기화</button>
+                                    </div>
+                                </div>
+
+                                <!-- 단계별 마일스톤 달성 보상 그리드 -->
+                                <div class="ped-milestones-wrapper">
+                                    <div style="font-size:0.85rem; font-weight:800; color:#2c3e50; margin-bottom:6px; display:flex; justify-content:space-between; align-items:center;">
+                                        <span>🏆 세세한 단계별 걸음 마일스톤 & 도토리 보상</span>
+                                        <small style="color:#7f8c8d;">목표 도달 시 클릭하여 도토리를 획득하세요!</small>
+                                    </div>
+                                    <div class="step-milestones-grid" id="stepMilestonesContainer"></div>
+                                </div>
+                            </div>
+
+                            <!-- 2. 맞춤 데일리 운동 완료 체크 (시간 입력 불필요!) -->
+                            <div class="workout-section-card">
+                                <div class="workout-section-header">
+                                    <div>
+                                        <strong style="color:#2c3e50; font-size:0.95rem;">🏋️ 맞춤 데일리 운동 완료 체크</strong>
+                                        <p style="color:#7f8c8d; font-size:0.8rem; margin-top:2px;">
+                                            시간 입력 없이 운동을 마쳤다면 1초 원터치로 체크하세요! (필라테스 · 요가 · 러닝 · 라이딩)
+                                        </p>
+                                    </div>
+                                    <span class="workout-guide-tag">⚡ 시간 안 써도 됨</span>
+                                </div>
+                                <div class="workout-actions-grid" id="workoutActionsGrid"></div>
+                            </div>
+
+                            <!-- 3. 원터치 마이크로 해빗 (기존 7개 유지) -->
+                            <div class="micro-section-card">
+                                <div class="workout-section-header">
+                                    <div>
+                                        <strong style="color:#27ae60; font-size:0.95rem;">⚡ 원터치 마이크로 해빗</strong>
+                                        <p style="color:#7f8c8d; font-size:0.8rem; margin-top:2px;">
+                                            거창한 운동 대신 1초 터치로 실천 가능한 일상 속 작은 습관! 도토리와 활력치가 즉시 충전됩니다.
+                                        </p>
+                                    </div>
+                                    <span class="workout-guide-tag" style="background:#e8f8f0; color:#27ae60; border-color:#2ecc71;">원터치 체크</span>
+                                </div>
+                                <div class="micro-habit-list" id="microActionsGrid"></div>
+                            </div>
+
+                        </div>
+
+                        <!-- [탭 5: 🛍️ 선물가게 (Shop)] -->
+                        <div class="cy-tab-panel" id="tab-shop">
+                            <div style="background:#fff9e6; border:2px solid #f9ca24; border-radius:8px; padding:10px; display:flex; justify-content:space-between; align-items:center;">
+                                <div>
+                                    <strong style="color:#d35400; font-size:1rem;">🛍️ 싸이월드 도토리 선물가게</strong>
+                                    <p style="font-size:0.8rem; color:#795548;">식단과 운동으로 모은 도토리로 미니미와 미니룸을 예쁘게 꾸며보세요!</p>
+                                </div>
+                                <div style="font-size:0.95rem; font-weight:800;">
+                                    내 도토리: <span id="shopAcornDisplay" style="color:#e67e22;">65개</span>
+                                </div>
+                            </div>
+
+                            <!-- 선물가게 카테고리 필터 바 -->
+                            <div class="shop-filter-bar">
+                                <button type="button" class="shop-filter-btn active" data-cat="all" onclick="window.app.setShopCategory('all')">🌟 전체보기</button>
+                                <button type="button" class="shop-filter-btn" data-cat="accessory" onclick="window.app.setShopCategory('accessory')">👗 미니미 악세사리</button>
+                                <button type="button" class="shop-filter-btn" data-cat="room" onclick="window.app.setShopCategory('room')">🛋️ 미니룸 소품</button>
+                                <button type="button" class="shop-filter-btn" data-cat="pet" onclick="window.app.setShopCategory('pet')">🐾 반려동물</button>
+                            </div>
+
+                            <div class="shop-items-grid" id="shopGridContainer"></div>
+                        </div>
+
+                        <!-- [탭 6: ⏳ 타임머신 (Future)] -->
+                        <div class="cy-tab-panel" id="tab-future">
+                            <div style="background:#f1f2f6; border:2px solid var(--cy-border); border-radius:8px; padding:12px; display:flex; flex-direction:column; gap:8px;">
+                                <div style="display:flex; justify-content:space-between; align-items:center;">
+                                    <strong style="color:#2c3e50; font-size:1rem;">⏳ 미래 자아 타임머신</strong>
+                                    <span id="forecastWeightLabel" style="color:#d35400; font-size:0.95rem; font-weight:800;">58.8kg (현재)</span>
+                                </div>
+                                <p style="font-size:0.82rem; color:#7f8c8d;">
+                                    습관을 지속했을 때 나의 변화된 모습과 미니룸을 미리 확인해 보세요!
+                                </p>
+                                <div class="timemachine-btn-group">
+                                    <button type="button" class="tm-step-btn active" data-key="now" onclick="window.app.setTimeMachineStep('now')">🌿 오늘 나의 정원</button>
+                                    <button type="button" class="tm-step-btn" data-key="2weeks" onclick="window.app.setTimeMachineStep('2weeks')">🌸 +2주 뒤 (-1.4kg)</button>
+                                    <button type="button" class="tm-step-btn" data-key="1month" onclick="window.app.setTimeMachineStep('1month')">🏡 +1달 뒤 (-3.2kg)</button>
+                                    <button type="button" class="tm-step-btn" data-key="3months" onclick="window.app.setTimeMachineStep('3months')">👑 +3달 뒤 (-6.5kg)</button>
+                                </div>
+                            </div>
+
+                            <!-- 타임캡슐 편지함 바로가기 -->
+                            <div style="background:#fff0f3; border:2px solid #ff7675; border-radius:8px; padding:12px; display:flex; justify-content:space-between; align-items:center;">
+                                <div>
+                                    <strong style="color:#d63031;">💌 미래의 나로부터 온 편지함</strong>
+                                    <p style="font-size:0.8rem; color:#636e72;">30일 뒤, 90일 뒤의 내가 보낸 격려 편지와 보너스 도토리를 열어보세요!</p>
+                                </div>
+                                <button type="button" class="acorn-charge-btn" style="background:#e84393; padding:8px 12px;" onclick="window.app.openLettersModal()">편지함 열기</button>
+                            </div>
+
+                            <!-- 긴급 SOS 야식 방어 버튼 -->
+                            <button type="button" class="sos-big-btn" onclick="window.app.openSosModal()">
+                                <span>🚨</span>
+                                <span>지금 야식·폭식 위기인가요? 30초 SOS 타임머신</span>
+                            </button>
+                        </div>
+
+                        <!-- [탭 7: 📖 방명록 (Guestbook)] -->
+                        <div class="cy-tab-panel" id="tab-guestbook">
+                            <!-- 방명록 작성창 -->
+                            <div class="guestbook-write-box">
+                                <div class="gb-form-row">
+                                    <span style="font-weight:800;">일촌명:</span>
+                                    <input type="text" id="gbAuthorInput" class="gb-input" placeholder="이름 (예: 헬스마니아_민수)">
+                                    <span style="font-weight:800;">스티커:</span>
+                                    <select id="gbStickerSelect" class="gb-input">
+                                        <option value="❤️ 퍼가요~♡">❤️ 퍼가요~♡</option>
+                                        <option value="🔥 열정 폭발">🔥 열정 폭발</option>
+                                        <option value="🍗 야식 절대 금지">🍗 야식 절대 금지</option>
+                                        <option value="✨ 베스트 드레서">✨ 베스트 드레서</option>
+                                        <option value="💮 참 잘했어요">💮 참 잘했어요</option>
+                                    </select>
+                                    <label style="font-size:0.8rem; cursor:pointer;">
+                                        <input type="checkbox" id="gbSecretCheck"> 🔒 비밀글
+                                    </label>
+                                </div>
+                                <textarea id="gbContentInput" class="gb-textarea" placeholder="싸이월드 감성으로 다이어터에게 따뜻한 응원의 한마디를 남겨주세요! (퍼가요~♡)"></textarea>
+                                <div style="display:flex; justify-content:flex-end;">
+                                    <button type="button" class="acorn-charge-btn" style="padding:6px 14px; font-size:0.85rem;" onclick="window.app.submitGuestbook()">
+                                        💬 방명록 남기기
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- 방명록 목록 -->
+                            <div style="display:flex; flex-direction:column; gap:10px;" id="guestbookListContainer"></div>
+                        </div>
+
+                    </div>
+                </main>
+
+            </div>
+        </div>
+
+        <!-- 4. 시그니처 우측 세로 탭 (Right Side Tabs) -->
+        <nav class="cy-side-tabs">
+            <button type="button" class="cy-tab-btn active" data-tab="home" onclick="window.app.switchTab('home')">홈</button>
+            <button type="button" class="cy-tab-btn" data-tab="diary" onclick="window.app.switchTab('diary')">다이어리</button>
+            <button type="button" class="cy-tab-btn" data-tab="diet" onclick="window.app.switchTab('diet')">신호등식단</button>
+            <button type="button" class="cy-tab-btn" data-tab="move" onclick="window.app.switchTab('move')">운동해빗</button>
+            <button type="button" class="cy-tab-btn" data-tab="shop" onclick="window.app.switchTab('shop')">선물가게</button>
+            <button type="button" class="cy-tab-btn" data-tab="future" onclick="window.app.switchTab('future')">타임머신</button>
+            <button type="button" class="cy-tab-btn" data-tab="guestbook" onclick="window.app.switchTab('guestbook')">방명록</button>
+        </nav>
+
+    </div>
+
+    <!-- ========================================================
+         [모달 팝업들]
+         ======================================================== -->
+
+    <!-- 한마디 수정 모달 -->
+    <div class="cy-modal-overlay" id="quoteModal">
+        <div class="cy-modal-box">
+            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid var(--cy-border); padding-bottom:8px;">
+                <strong>✏️ 감성 한마디 수정</strong>
+                <button type="button" class="bgm-ctrl-btn" onclick="window.app.closeModals()">✕</button>
+            </div>
+            <textarea id="quoteModalInput" class="diary-textarea" style="height:70px;"></textarea>
+            <button type="button" class="acorn-charge-btn" style="padding:8px;" onclick="window.app.saveQuoteModal()">저장하기</button>
+        </div>
+    </div>
+
+    <!-- 체중 수정 모달 -->
+    <div class="cy-modal-overlay" id="weightModal">
+        <div class="cy-modal-box">
+            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid var(--cy-border); padding-bottom:8px;">
+                <strong>⚖️ 현재 체중 & 목표 체중 수정</strong>
+                <button type="button" class="bgm-ctrl-btn" onclick="window.app.closeModals()">✕</button>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:8px; font-size:0.85rem;">
+                <label>시작 체중 (kg): <input type="number" step="0.1" id="inputStartWeight" class="diary-input"></label>
+                <label>현재 체중 (kg): <input type="number" step="0.1" id="inputCurrentWeight" class="diary-input"></label>
+                <label>목표 체중 (kg): <input type="number" step="0.1" id="inputTargetWeight" class="diary-input"></label>
+            </div>
+            <button type="button" class="acorn-charge-btn" style="padding:8px;" onclick="window.app.saveWeightModal()">수정 완료</button>
+        </div>
+    </div>
+
+    <!-- 타이틀 수정 모달 -->
+    <div class="cy-modal-overlay" id="titleModal">
+        <div class="cy-modal-box">
+            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid var(--cy-border); padding-bottom:8px;">
+                <strong>✏️ 미니홈피 제목 수정</strong>
+                <button type="button" class="bgm-ctrl-btn" onclick="window.app.closeModals()">✕</button>
+            </div>
+            <input type="text" id="inputHomeTitle" class="diary-input">
+            <button type="button" class="acorn-charge-btn" style="padding:8px;" onclick="window.app.saveTitleModal()">저장하기</button>
+        </div>
+    </div>
+
+    <!-- 긴급 야식 SOS 모달 -->
+    <div class="cy-modal-overlay" id="sosModal">
+        <div class="cy-modal-box">
+            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid #2f3542; padding-bottom:8px;">
+                <strong style="color:#e74c3c; font-size:1.15rem;">🚨 긴급 야식·폭식 SOS 타임머신</strong>
+                <button type="button" class="bgm-ctrl-btn" onclick="window.app.closeModals()">✕</button>
+            </div>
+            <p style="font-size:0.85rem; line-height:1.5;">
+                냉장고 문을 열기 전, <strong>30초만 타임머신으로 내일 아침을 미리 보세요!</strong>
+            </p>
+            <div id="sosTimerDisplay" style="text-align:center; font-size:1.15rem; font-weight:800; color:#e67e22;">
+                ⏳ 충동이 가라앉는 호흡 시간: 30초
+            </div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+                <div style="background:#fdeeed; border:2px solid #fab1a0; border-radius:6px; padding:10px; font-size:0.8rem;">
+                    <strong style="color:#c0392b;">❌ 지금 먹는다</strong>
+                    <p style="margin-top:4px;">15분 쾌락 후 내일 아침 속 쓰림, 부은 얼굴, 자책감 폭발...</p>
+                </div>
+                <div style="background:#ebfbee; border:2px solid #a8e6cf; border-radius:6px; padding:10px; font-size:0.8rem;">
+                    <strong style="color:#27ae60;">✨ 물 마시고 참는다</strong>
+                    <p style="margin-top:4px;">내일 아침 붓기 제로, 날렵한 턱선, 가뿐한 성취감!</p>
+                </div>
+            </div>
+            <button type="button" class="acorn-charge-btn" style="width:100%; background:#2ecc71; color:#fff; padding:12px; font-size:0.95rem;" onclick="window.app.claimSosVictory()">
+                🛡️ 물 한 잔 마시고 참아냈다! (+10도토리 즉시 획득)
+            </button>
+        </div>
+    </div>
+
+    <!-- 편지함 모달 -->
+    <div class="cy-modal-overlay" id="lettersModal">
+        <div class="cy-modal-box">
+            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid #2f3542; padding-bottom:8px;">
+                <strong style="color:#b71540; font-size:1.15rem;">💌 미래의 나로부터 온 편지함</strong>
+                <button type="button" class="bgm-ctrl-btn" onclick="window.app.closeModals()">✕</button>
+            </div>
+            <div id="lettersContainer" style="display:flex; flex-direction:column; gap:10px;"></div>
+        </div>
+    </div>
+
+    <!-- 무료 도토리 충전 모달 -->
+    <div class="cy-modal-overlay" id="freeAcornModal">
+        <div class="cy-modal-box">
+            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid #2f3542; padding-bottom:8px;">
+                <strong style="color:#d35400; font-size:1.1rem;">🌰 도토리 무료 충전소</strong>
+                <button type="button" class="bgm-ctrl-btn" onclick="window.app.closeModals()">✕</button>
+            </div>
+            <p style="font-size:0.85rem;">다이어트 미션을 실천하면 도토리가 무료로 충전됩니다!</p>
+            <div style="display:flex; flex-direction:column; gap:8px;">
+                <button type="button" class="acorn-charge-btn" style="padding:10px; font-size:0.85rem;" onclick="window.app.claimFreeAcorns('water', 5)">
+                    💧 물 한 컵 원샷하기 (+5 도토리)
+                </button>
+                <button type="button" class="acorn-charge-btn" style="padding:10px; font-size:0.85rem;" onclick="window.app.claimFreeAcorns('stretch', 10)">
+                    🧘 목/어깨 1분 스트레칭하기 (+10 도토리)
+                </button>
+                <button type="button" class="acorn-charge-btn" style="padding:10px; font-size:0.85rem;" onclick="window.app.claimFreeAcorns('cheer', 15)">
+                    📣 거울 보고 "난 할 수 있다!" 외치기 (+15 도토리)
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 일촌 파도타기 인사 모달 -->
+    <div class="cy-modal-overlay" id="surfGreetingModal">
+        <div class="cy-modal-box">
+            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid #2f3542; padding-bottom:8px;">
+                <strong id="surfModalTitle" style="color:#2980b9; font-size:1.1rem;">🌊 일촌 홈피 방문!</strong>
+                <button type="button" class="bgm-ctrl-btn" onclick="window.app.closeModals()">✕</button>
+            </div>
+            <div id="surfModalContent" style="font-size:0.88rem; line-height:1.5;"></div>
+            <button type="button" class="acorn-charge-btn" style="padding:8px;" onclick="window.app.closeModals()">홈피 구경 마치기</button>
+        </div>
+    </div>
+
+    <!-- 미니룸 미니미 & 가구 배치 설정 모달 -->
+    <div class="cy-modal-overlay" id="arrangeModal">
+        <div class="cy-modal-box" style="max-width: 520px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid var(--cy-border); padding-bottom:8px;">
+                <strong style="font-size:1.05rem; color:#2c3e50;">🛋️ 미니룸 미니미 & 가구 위치 배치 설정</strong>
+                <button type="button" class="bgm-ctrl-btn" onclick="window.app.closeModals()">✕</button>
+            </div>
+            
+            <div style="background:#eef8ff; border:1px solid #74b9ff; border-radius:6px; padding:8px 10px; font-size:0.82rem; color:#0984e3; line-height:1.4;">
+                💡 <strong>미니미 가림 방지 팁:</strong> 미니룸 화면에서 마우스로 직접 드래그하여 배치하거나, 아래의 프리셋 및 위치 설정으로 미니미와 가구를 자유롭게 이동할 수 있습니다!
+            </div>
+
+            <!-- 1. 미니미 가림 방지 모드 토글 -->
+            <div style="background:#fff9e6; border:1.5px solid #f9ca24; border-radius:6px; padding:10px; display:flex; justify-content:space-between; align-items:center;">
+                <div>
+                    <strong style="font-size:0.88rem; color:#d35400;">👑 미니미 항상 맨 앞에 표시</strong>
+                    <p style="font-size:0.75rem; color:#7f8c8d; margin-top:2px;">가구나 반려동물이 앞쪽에 있더라도 미니미가 가려지지 않게 최상단에 렌더링합니다.</p>
+                </div>
+                <label style="cursor:pointer; display:flex; align-items:center; gap:4px; font-size:0.85rem; font-weight:800; color:#27ae60;">
+                    <input type="checkbox" id="minimiAlwaysOnTopCheck" onchange="window.app.toggleMinimiAlwaysOnTop(this.checked)" checked>
+                    <span>가림 방지</span>
+                </label>
+            </div>
+
+            <!-- 2. 미니미 추천 위치 프리셋 -->
+            <div style="display:flex; flex-direction:column; gap:6px;">
+                <strong style="font-size:0.85rem; color:#2c3e50;">🚶 미니미 추천 위치 프리셋 (원클릭 이동):</strong>
+                <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:6px;">
+                    <button type="button" class="preset-pos-btn" onclick="window.app.setPresetPosition('minimi', 5.5, 6.0)">
+                        🌟 앞마당 중앙 (5.5, 6.0)
+                    </button>
+                    <button type="button" class="preset-pos-btn" onclick="window.app.setPresetPosition('minimi', 6.5, 7.5)">
+                        👑 맨 앞쪽 VIP존 (가림 0%)
+                    </button>
+                    <button type="button" class="preset-pos-btn" onclick="window.app.setPresetPosition('minimi', 6.8, 5.0)">
+                        ⛲ 우측 분수대 앞 (6.8, 5.0)
+                    </button>
+                    <button type="button" class="preset-pos-btn" onclick="window.app.setPresetPosition('minimi', 3.6, 6.2)">
+                        🪵 좌측 테라스 데크 (3.6, 6.2)
+                    </button>
+                </div>
+            </div>
+
+            <!-- 3. 현재 배치된 아이템 목록 & 개별 위치 조정 -->
+            <div style="display:flex; flex-direction:column; gap:6px;">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <strong style="font-size:0.85rem; color:#2c3e50;">📦 배치된 가구 & 반려동물 목록:</strong>
+                    <small style="color:#7f8c8d;">배치 좌표 (X, Y)</small>
+                </div>
+                <div id="arrangeItemsList" style="display:flex; flex-direction:column; gap:6px; max-height:160px; overflow-y:auto; padding-right:4px;"></div>
+            </div>
+
+            <!-- 하단 버튼들 -->
+            <div style="display:flex; justify-content:space-between; align-items:center; border-top:1.5px dashed #dcdde1; padding-top:8px; margin-top:4px;">
+                <button type="button" class="step-quick-btn reset" onclick="window.app.resetItemPositions()">
+                    🔄 전체 기본 위치 리셋
+                </button>
+                <div style="display:flex; gap:6px;">
+                    <button type="button" class="acorn-charge-btn" style="background:#74b9ff;" onclick="window.app.closeModals(); window.app.toggleArrangeMode(true);">
+                        ✋ 화면에서 드래그 배치
+                    </button>
+                    <button type="button" class="acorn-charge-btn" onclick="window.app.closeModals()">
+                        ✓ 닫기
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 포춘쿠키 오픈 모달 -->
+    <div class="cy-modal-overlay" id="fortuneModal">
+        <div class="cy-modal-box" style="max-width: 440px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid #e67e22; padding-bottom:8px;">
+                <strong style="font-size:1.1rem; color:#d35400;">🥠 오늘의 감성 다이어트 포춘쿠키</strong>
+                <button type="button" class="bgm-ctrl-btn" onclick="window.app.closeModals()">✕</button>
+            </div>
+            
+            <div class="fortune-paper-box">
+                <span style="font-size:2.4rem;">🥠 ✨ 🌰</span>
+                <div class="fortune-quote-text" id="fortuneQuoteDisplay">
+                    "ㄴr는 ㄱr끔... 땀을 흘린ㄷr... 땀은 지방이 흘리는 눈물이니까...★"
+                </div>
+                <div class="fortune-author-text" id="fortuneAuthorDisplay">- 감성 다이어터 미니미 -</div>
+                <div class="fortune-tip-text" id="fortuneTipDisplay">
+                    오늘 흘린 땀방울 하나하나가 내일의 날렵한 턱선이 됩니다. 퍼가요~♡
+                </div>
+                <div style="font-size:0.95rem; font-weight:800; color:#e67e22;" id="fortuneRewardDisplay">
+                    🌰 행운의 도토리 +3개 획득!
+                </div>
+            </div>
+
+            <button type="button" class="acorn-charge-btn" style="padding:8px;" onclick="window.app.closeModals()">
+                ✓ 도토리 챙기고 갓생 살기
+            </button>
+        </div>
+    </div>
+
+    <!-- 싸이 감성 폴라로이드 사진 모달 -->
+    <div class="cy-modal-overlay" id="polaroidModal">
+        <div class="cy-modal-box" style="max-width: 480px; background:#f5f6fa;">
+            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid var(--cy-border); padding-bottom:8px;">
+                <strong style="font-size:1.05rem; color:#2c3e50;">📸 2000년대 미니홈피 폴라로이드 사진</strong>
+                <button type="button" class="bgm-ctrl-btn" onclick="window.app.closeModals()">✕</button>
+            </div>
+
+            <div class="polaroid-card" id="polaroidCardNode">
+                <div class="polaroid-tape"></div>
+                <div class="polaroid-photo-frame" id="polaroidSnapshotContainer">
+                    <!-- 미니룸 복제 또는 캡처 뷰 -->
+                </div>
+                <div class="polaroid-footer">
+                    <div class="polaroid-title" id="polaroidTitleText">★...ㅁㅣㄴㅣㅁㅣ의 눈물겨운 ㄷㅏ이어트 성ㄱㅗㅇㄱㅣ...★</div>
+                    <div class="polaroid-meta-row">
+                        <span id="polaroidDateText">2026.11.17</span>
+                        <span id="polaroidWeightText" style="color:#27ae60; font-weight:800;">58.8kg (-3.2kg 감량)</span>
+                    </div>
+                    <div class="polaroid-quote" id="polaroidQuoteText">
+                        "ㄴㅏ는 ㄱㅏ끔... 땀을 흘린ㄷㅏ... 치킨 앞에ㅅㅓ 배고픔을 참는 내 모습이 좋ㄷㅏ...★"
+                    </div>
+                </div>
+                <div class="polaroid-stamp-watermark">
+                    💮 퍼가요~♡
+                </div>
+            </div>
+
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px;">
+                <small style="color:#7f8c8d;">cyworld.com/diet_hero_2000</small>
+                <div style="display:flex; gap:6px;">
+                    <button type="button" class="acorn-charge-btn" style="background:#74b9ff;" onclick="window.app.copyPolaroidShare()">
+                        📋 사진 문구 복사
+                    </button>
+                    <button type="button" class="acorn-charge-btn" onclick="window.app.closeModals()">
+                        ✓ 닫기
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 스크립트 로드 순서 -->
+    <script src="js/data.js"></script>
+    <script src="js/audio.js"></script>
+    <script src="js/garden.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
